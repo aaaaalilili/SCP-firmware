@@ -7,12 +7,15 @@
 
 #include <fwk_attributes.h>
 #include <fwk_io.h>
+#include <fwk_log.h>
 
 #include <assert.h>
 
 #if defined(__ARMCC_VERSION)
 void __aeabi_assert(const char *expr, const char *file, int line)
 {
+    FWK_LOG_ERR("Assertion failed at %s:%d\n", file, line);
+
     (void)fwk_io_printf(
         fwk_io_stdout, "Assertion failed at %s:%d\n", file, line);
 
